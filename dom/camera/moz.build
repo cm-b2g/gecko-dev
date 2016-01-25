@@ -46,6 +46,11 @@ if CONFIG['MOZ_B2G_CAMERA']:
             'GonkCameraSource.cpp',
             'GonkRecorder.cpp',
         ]
+        CXXFLAGS += [
+            '-I%s/%s' % (CONFIG['ANDROID_SOURCE'], d) for d in [
+                'frameworks/native/opengl/include',
+            ]
+        ]
     else:
         UNIFIED_SOURCES += [
             'FallbackCameraPlatform.cpp',
