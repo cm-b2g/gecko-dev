@@ -46,6 +46,11 @@
 # endif
 
 # include <android/log.h>
+
+#ifndef CONDITION
+#define CONDITION(cond) (!!(cond))
+#endif
+
 # define LOGE_IF(cond, ...) \
      ( (CONDITION(cond)) \
      ? ((void)__android_log_print(ANDROID_LOG_ERROR, \
