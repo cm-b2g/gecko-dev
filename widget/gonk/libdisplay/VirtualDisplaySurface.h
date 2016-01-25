@@ -99,8 +99,13 @@ private:
     //
     virtual status_t requestBuffer(int pslot, sp<GraphicBuffer>* outBuf);
     virtual status_t setBufferCount(int bufferCount);
+#if ANDROID_VERSION >= 23
+    virtual status_t dequeueBuffer(int* pslot, sp<Fence>* fence, bool async,
+            uint32_t w, uint32_t h, PixelFormat format, uint32_t usage);
+#else
     virtual status_t dequeueBuffer(int* pslot, sp<Fence>* fence, bool async,
             uint32_t w, uint32_t h, uint32_t format, uint32_t usage);
+#endif
     virtual status_t detachBuffer(int slot);
     virtual status_t detachNextBuffer(sp<GraphicBuffer>* outBuffer,
             sp<Fence>* outFence);
@@ -120,15 +125,25 @@ private:
 #if ANDROID_VERSION >= 21
     virtual status_t setSidebandStream(const sp<NativeHandle>& stream);
 #endif
+#if ANDROID_VERSION >= 23
+    virtual void allocateBuffers(bool async, uint32_t width, uint32_t height,
+            PixelFormat format, uint32_t usage);
+#else
     virtual void allocateBuffers(bool async, uint32_t width, uint32_t height,
             uint32_t format, uint32_t usage);
+#endif
 
     //
     // Utility methods
     //
     static Source fbSourceForCompositionType(CompositionType type);
+#if ANDROID_VERSION >= 23
+    status_t dequeueBuffer(Source source, PixelFormat format, uint32_t usage,
+            int* sslot, sp<Fence>* fence);
+#else
     status_t dequeueBuffer(Source source, uint32_t format, uint32_t usage,
             int* sslot, sp<Fence>* fence);
+#endif
     void updateQueueBufferOutput(const QueueBufferOutput& qbo);
     void resetPerFrameState();
     status_t refreshOutputBuffer();
