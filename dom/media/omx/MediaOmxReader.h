@@ -7,7 +7,7 @@
 #define MediaOmxReader_h_
 
 #include "MediaOmxCommonReader.h"
-#include "MediaResource.h"
+#include "MediaResource2.h"
 #include "MediaDecoderReader.h"
 #include "nsMimeTypes.h"
 #include "MP3FrameParser.h"
