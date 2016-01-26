@@ -128,6 +128,9 @@ private:
 #if ANDROID_VERSION >= 23
     virtual void allocateBuffers(bool async, uint32_t width, uint32_t height,
             PixelFormat format, uint32_t usage);
+    virtual status_t allowAllocation(bool allow);
+    virtual status_t setGenerationNumber(uint32_t generationNumber);
+    virtual String8 getConsumerName() const;
 #else
     virtual void allocateBuffers(bool async, uint32_t width, uint32_t height,
             uint32_t format, uint32_t usage);

@@ -682,6 +682,21 @@ void VirtualDisplaySurface::allocateBuffers(bool /* async */,
 }
 #endif
 
+#if ANDROID_VERSION >= 23
+status_t VirtualDisplaySurface::allowAllocation(bool /* allow */) {
+    return INVALID_OPERATION;
+}
+
+status_t VirtualDisplaySurface::setGenerationNumber(uint32_t /* generation */) {
+    ALOGE("setGenerationNumber not supported on VirtualDisplaySurface");
+    return INVALID_OPERATION;
+}
+
+String8 VirtualDisplaySurface::getConsumerName() const {
+    return String8("VirtualDisplaySurface");
+}
+#endif
+
 void VirtualDisplaySurface::updateQueueBufferOutput(
         const QueueBufferOutput& qbo) {
     uint32_t w, h, transformHint, numPendingBuffers;
