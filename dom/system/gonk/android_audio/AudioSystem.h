@@ -1028,7 +1028,12 @@ public:
         virtual void onServiceDied() = 0;
 
     };
+#endif
 
+#if ANDROID_VERSION >= 23
+    static status_t addAudioPortCallback(const sp<AudioPortCallback>& callback);
+    static status_t removeAudioPortCallback(const sp<AudioPortCallback>& callback);
+#elif ANDROID_VERSION >= 21
     static void setAudioPortCallback(sp<AudioPortCallback> callBack);
 #endif
 
