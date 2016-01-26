@@ -8,6 +8,7 @@
 #include <cutils/android_reboot.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/mount.h>
 #include <sys/reboot.h>
 #include <sys/types.h>
